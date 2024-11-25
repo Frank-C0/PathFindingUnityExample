@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
+// Extensiones genéricas útiles para colecciones.
 public static class Extensions
 {
-    private static System.Random rng = new System.Random();
+    private static Random rng = new Random();
+
+    // Mezcla aleatoriamente una lista genérica utilizando el algoritmo Fisher-Yates.
     public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
@@ -12,10 +14,7 @@ public static class Extensions
         {
             n--;
             int k = rng.Next(n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value; 
+            (list[k], list[n]) = (list[n], list[k]);
         }
     }
-
-}
+} 
